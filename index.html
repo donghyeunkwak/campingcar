@@ -6,206 +6,254 @@
 <title>캠핑카 주의사항</title>
 
 <style>
-    * {
-        box-sizing: border-box;
-    }
+:root {
+    --bg-1: #4a4cff;
+    --bg-2: #1e1b79;
+    --bg-3: #6f8bff;
+    --accent: #ff5d73;
+    --card-bg: rgba(255, 255, 255, 0.26);
+    --card-border: rgba(255, 255, 255, 0.45);
+    --text-strong: rgba(255, 255, 255, 0.95);
+}
 
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Pretendard", sans-serif;
+    display: flex;
+    justify-content: center;
+    padding: 40px 18px 80px;
+
+    background: linear-gradient(135deg, var(--bg-1), var(--bg-3), var(--bg-2));
+    background-size: 220% 220%;
+    animation: gradientMove 10s ease-in-out infinite;
+    color: white;
+}
+
+@keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.page {
+    width: 100%;
+    max-width: 520px;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    color: white;
+    padding: 16px 0 32px;
+}
+
+.header-icon {
+    display: inline-flex;
+    padding: 12px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    margin-bottom: 18px;
+}
+
+.header-title {
+    font-size: 34px;
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: -0.8px;
+    text-shadow: 0 12px 25px rgba(24, 6, 66, 0.55);
+}
+
+.highlight-red {
+    color: var(--accent);
+}
+
+.header-sub {
+    font-size: 15px;
+    font-weight: 500;
+    opacity: 0.95;
+    line-height: 1.5;
+}
+
+.card-group {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+/* GLASS CARD + GLOW */
+.card {
+    padding: 26px 26px 18px;
+    background: var(--card-bg);
+    backdrop-filter: blur(26px);
+    -webkit-backdrop-filter: blur(26px);
+    border-radius: 24px;
+    border: 1px solid var(--card-border);
+
+    box-shadow:
+        0 15px 45px rgba(11, 4, 50, 0.35),
+        0 0 40px rgba(255, 255, 255, 0.15);
+}
+
+.card-title {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 18px;
+    color: var(--text-strong);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-title::after {
+    content: "";
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.5), transparent);
+}
+
+/* LIST ITEMS */
+.list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.list li {
+    position: relative;
+    padding: 14px 0 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.92);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.list li:last-child {
+    border-bottom: none;
+}
+
+/* RED DOT */
+.list li::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: var(--accent);
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 22px;
+    box-shadow: 0 0 12px rgba(255, 93, 115, 0.8);
+}
+
+@media (min-width: 640px) {
     body {
-        margin: 0;
-        padding: 0;
-        font-family: "Pretendard", sans-serif;
-
-        /* 전체 그라데이션 배경 */
-        background: linear-gradient(145deg, #7b8dff, #4b5dff, #2f2d99);
-        background-size: 200% 200%;
-        animation: gradientMove 8s ease infinite;
-        color: white;
-    }
-
-    @keyframes gradientMove {
-        0% { background-position: 0% 50%; }
-        50% { background-position: 100% 50%; }
-        100% { background-position: 0% 50%; }
-    }
-
-    /* HEADER */
-    .header {
-        padding: 55px 20px 85px;
-        text-align: center;
-        color: white;
+        padding: 60px 24px 100px;
     }
 
     .header-title {
-        font-size: 32px;
-        font-weight: 900;
-        margin-bottom: 10px;
-        letter-spacing: -0.5px;
+        font-size: 38px;
     }
 
-    .highlight-red {
-        color: #ff4b4b;   /* 요구사항: RED */
-        font-weight: 900;
-    }
-
-    .header-sub {
-        font-size: 16px;
-        font-weight: 600;
-        opacity: 0.95;
-        margin-top: 4px;
-    }
-
-    /* GLASS CARD + GLOW */
     .card {
-        width: 90%;
-        max-width: 430px;
-        margin: 18px auto;
-        padding: 24px 22px;
-
-        background: rgba(255, 255, 255, 0.28);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-
-        border-radius: 20px;
-        border: 1px solid rgba(255, 255, 255, 0.35);
-
-        /* Glow */
-        box-shadow:
-            0 10px 32px rgba(0, 0, 0, 0.25),
-            0 0 25px rgba(255, 255, 255, 0.28);
+        padding: 30px 32px 20px;
     }
-
-    .card-title {
-        font-size: 18px;
-        font-weight: 900;
-        margin-bottom: 18px;
-        color: #ffffff;
-        letter-spacing: -0.2px;
-    }
-
-    /* LIST ITEMS */
-    .list {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-    }
-
-    .list li {
-        position: relative;
-        padding: 12px 0 12px 16px;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1.6;
-        color: #fefefe;
-
-        border-bottom: 1px solid rgba(255, 255, 255, 0.28);
-    }
-
-    .list li:last-child {
-        border-bottom: none;
-    }
-
-    /* RED DOT */
-    .list li::before {
-        content: "";
-        width: 7px;
-        height: 7px;
-        background: #ff3b3b;
-        border-radius: 50%;
-        position: absolute;
-        left: 0;
-        top: 18px;
-    }
+}
 </style>
 </head>
 
 <body>
+<div class="page">
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-icon" aria-hidden="true">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none"
+                 stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M3 7h13l5 5v5h-3"/>
+                <circle cx="7.5" cy="17.5" r="2.5"/>
+                <circle cx="17.5" cy="17.5" r="2.5"/>
+                <path d="M3 7v10h2"/>
+                <path d="M16 7v5h5"/>
+            </svg>
+        </div>
 
-<!-- HEADER -->
-<div class="header">
+        <div class="header-title">
+            캠핑카 <span class="highlight-red">주의</span>사항
+        </div>
+        <p class="header-sub">
+            오케이 모터스 캠핑카 이용 전 꼭 확인해주세요
+        </p>
+    </header>
 
-    <!-- 캠핑카 아이콘 -->
-    <div style="margin-bottom: 14px;">
-        <svg width="43" height="43" viewBox="0 0 24 24" fill="none"
-             stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 7h13l5 5v5h-3"/>
-            <circle cx="7.5" cy="17.5" r="2.5"/>
-            <circle cx="17.5" cy="17.5" r="2.5"/>
-            <path d="M3 7v10h2"/>
-            <path d="M16 7v5h5"/>
-        </svg>
-    </div>
+    <main class="card-group">
+        <!-- 🚐 캠핑카 이용 안내 -->
+        <section class="card">
+            <h2 class="card-title">🚐 캠핑카 이용 안내</h2>
+            <ul class="list">
+                <li>캠핑카 내부 시설은 모두 차량 시동을 걸지 않아도 이용할 수 있습니다.</li>
+                <li>청수통, 오수통 용량은 차량 내부 비치된 설명서를 참고해주세요.</li>
+                <li>대여한 용품은 사용 후 깨끗하게 정리 부탁드립니다.</li>
+                <li>내부 시설과 가구는 보험 처리 불가하니 파손 없이 사용해주세요.</li>
+                <li>전자 제품 여러 개 동시 사용 시 전원이 차단될 수 있으니 텀을 두고 별도로 사용해주세요.</li>
+                <li>시설 사용 방법 문의 전에는 내부 설명서를 먼저 확인해주세요.</li>
+                <li>주행 전 환풍기 덮개, 아웃트리거, 수납함 잠금 상태를 꼭 점검해주세요.</li>
+                <li>주차 중 사고가 잦으니 반드시 동승자가 내려 주변을 확인해주세요.</li>
+            </ul>
+        </section>
 
-    <!-- 타이틀 -->
-    <div class="header-title">
-        캠핑카 <span class="highlight-red">주의</span>사항
-    </div>
+        <!-- 🔥 난방 / 히터 / 온수 -->
+        <section class="card">
+            <h2 class="card-title">🔥 난방 / 히터 / 온수</h2>
+            <ul class="list">
+                <li>바닥 난방, 공기 히터, 온수를 사용하려면 무시동 히터가 먼저 작동해야 합니다.</li>
+                <li>충분히 따뜻해지기까지 약 10분이 필요하니 사용 전에 미리 가동해주세요.</li>
+                <li>주행 중 난방과 히터 사용은 고장 위험이 있으므로 주행 전 반드시 전원을 꺼주세요.</li>
+            </ul>
+        </section>
 
-    <!-- 서브텍스트 -->
-    <div class="header-sub">
-        오케이 모터스 캠핑카 이용 전 꼭 확인해주세요
-    </div>
+        <!-- ❄️ 에어컨 / 전자레인지 / 콘센트 -->
+        <section class="card">
+            <h2 class="card-title">❄️ 에어컨 / 전자레인지 / 콘센트</h2>
+            <ul class="list">
+                <li>에어컨과 전자레인지를 사용하기 전에 인버터를 먼저 켜주세요.</li>
+                <li>실내 콘센트를 사용할 때도 인버터 작동이 필요합니다.</li>
+                <li>내부가 시원해지기까지 약 10분이 걸립니다.</li>
+                <li>주행 중에도 에어컨 사용은 가능하나 배터리 잔량을 수시로 확인해주세요.</li>
+            </ul>
+        </section>
+
+        <!-- 🚽 화장실 이용 -->
+        <section class="card">
+            <h2 class="card-title">🚽 화장실 이용 시 주의사항</h2>
+            <ul class="list">
+                <li>변기, 샤워기, 수도를 사용하려면 물펌프 버튼이 켜져 있어야 합니다.</li>
+                <li>물을 사용하지 않을 때는 반드시 물펌프 버튼을 꺼주세요.</li>
+                <li>변기를 사용했다면 카트리지를 비우고 반납해주세요.</li>
+                <li>외부 카트리지함을 열고 내용물을 캠핑장이나 휴게소 등 외부 변기에 버린 뒤 물로 2~3회 헹궈 다시 넣어주세요.</li>
+                <li>소변을 한 번이라도 보셨다면 카트리지를 꼭 비워주세요. (미이행 시 청소비 6만원)</li>
+                <li>카트리지 잔량 확인이 어려우니 적당히 찼다 싶으면 바로 비워주세요.</li>
+                <li>변기 사용 후 레버와 뚜껑을 닫아 주행 시 오물이 튀는 것을 방지해주세요.</li>
+                <li>물은 일반 가정집처럼 사용하면 금방 소진되니 절약해 주세요.</li>
+                <li>주방·화장실 물 사용 시 오수통도 함께 비워주세요. (방법은 내부 설명서 참고)</li>
+                <li>동절기에는 캠핑카 내 모든 수전 사용이 불가합니다.</li>
+            </ul>
+        </section>
+
+        <!-- 🔑 반납 전 확인사항 -->
+        <section class="card">
+            <h2 class="card-title">🔑 반납 전 확인사항</h2>
+            <ul class="list">
+                <li>반납 전 냉장고, 하이패스 단말기, 수납장 등 내부에 물건이 남아 있는지 확인해주세요.</li>
+                <li>변기를 사용했다면 반드시 카트리지를 비워주세요. (미이행 시 청소비 6만원)</li>
+                <li>반납 시간은 반드시 준수 부탁드립니다.</li>
+            </ul>
+        </section>
+    </main>
 </div>
-
-
-<!-- 기본 안내 -->
-<div class="card">
-    <div class="card-title">기본 이용 안내</div>
-    <ul class="list">
-        <li>차량 내부 시설은 시동을 켠 상태에서 이용 가능합니다.</li>
-        <li>청소도구·온수 사용은 내부 비치된 설명서를 참고해주세요.</li>
-        <li>대여 용품은 사용 후 반드시 정리해주세요.</li>
-        <li>시설 및 가구는 분리하거나 강한 충격을 주지 마세요.</li>
-        <li>전자제품 다수 동시 사용 시 전원 차단될 수 있습니다.</li>
-        <li>사용 설명은 내부 가이드를 먼저 확인해주세요.</li>
-        <li>주행 시 반드시 안전벨트를 착용해주세요.</li>
-        <li>주차 전·후 주변을 반드시 확인해주세요.</li>
-    </ul>
-</div>
-
-
-<!-- 상세 안내 -->
-<div class="card">
-    <div class="card-title">난방 / 히터 / 온수</div>
-    <ul class="list">
-        <li>시동 ON 상태에서만 작동합니다.</li>
-        <li>장시간 사용 시 과열에 주의해주세요.</li>
-        <li>온수는 일정 시간 후 자동 차단될 수 있습니다.</li>
-    </ul>
-</div>
-
-<div class="card">
-    <div class="card-title">에어컨</div>
-    <ul class="list">
-        <li>배터리 소모가 크므로 필요한 경우에만 사용해주세요.</li>
-        <li>외부 온도에 따라 냉방 성능이 달라질 수 있습니다.</li>
-    </ul>
-</div>
-
-<div class="card">
-    <div class="card-title">전자레인지 / 콘센트</div>
-    <ul class="list">
-        <li>전자레인지 사용 시 다른 전열기구는 동시에 사용하지 마세요.</li>
-        <li>정격 용량을 초과하지 않도록 주의해주세요.</li>
-    </ul>
-</div>
-
-<div class="card">
-    <div class="card-title">화장실 이용</div>
-    <ul class="list">
-        <li>휴지 외 이물질을 절대 투입하지 마세요.</li>
-        <li>냄새 발생 시 즉시 문의해주세요.</li>
-        <li>화장실 용액은 임의로 넣지 말아주세요.</li>
-    </ul>
-</div>
-
-<div class="card">
-    <div class="card-title">반납 전 확인사항</div>
-    <ul class="list">
-        <li>쓰레기 및 음식물을 정리 후 반납해주세요.</li>
-        <li>대여 용품은 원래 위치에 정리해주세요.</li>
-        <li>연료 잔량을 확인하고 필요한 경우 주유해주세요.</li>
-    </ul>
-</div>
-
 </body>
 </html>
